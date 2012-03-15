@@ -1,0 +1,7 @@
+# git ignore file
+*Resharper*
+bin/
+obj/
+_Resharper
+*.suo
+*.user
