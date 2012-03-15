@@ -7,42 +7,41 @@ using Ninject.Planning.Bindings;
 
 namespace efsession
 {
-    internal class OverridableBindingGenerator<TService> : IBindingGenerator
+    internal class OverridableBindingGenerator : IBindingGenerator
     {
         private readonly string _serviceAssembly;
-
-        public OverridableBindingGenerator()
+        private readonly Type _service;
+        public OverridableBindingGenerator(Type type)
         {
-            _serviceAssembly = Assembly(typeof(TService));
+            _service = type;
+            _serviceAssembly = Assembly(_service);
         }
 
         public void Process(Type type, Func<IContext, object> scopeCallback, IKernel kernel)
         {
-            var service = typeof(TService);
-
             if (NoBindingsIn(kernel))
             {
-                kernel.Rebind(service).To(type).InScope(scopeCallback).WithMetadata("assembly", Assembly(type));
+                kernel.Rebind(_service).To(type).InScope(scopeCallback).WithMetadata("assembly", Assembly(type));
                 return;
             }
 
             if (DefaultBindingIn(kernel) && Assembly(type) != _serviceAssembly)
             {
-                kernel.Rebind(service).To(type).InScope(scopeCallback).WithMetadata("assembly", Assembly(type));
+                kernel.Rebind(_service).To(type).InScope(scopeCallback).WithMetadata("assembly", Assembly(type));
                 return;
             }
 
-            kernel.Bind(service).To(type).InScope(scopeCallback).WithMetadata("assembly", Assembly(type));
+            kernel.Bind(_service).To(type).InScope(scopeCallback).WithMetadata("assembly", Assembly(type));
         }
 
         private bool NoBindingsIn(IKernel kernel)
         {
-            return !kernel.GetBindings(typeof(TService)).Any(HasAssemblyKey);
+            return !kernel.GetBindings(_service).Any(HasAssemblyKey);
         }
 
         private bool DefaultBindingIn(IKernel kernel)
         {
-            return kernel.GetBindings(typeof(TService)).Any(IsServiceAssemblyBinding);
+            return kernel.GetBindings(_service).Any(IsServiceAssemblyBinding);
 
         }
 

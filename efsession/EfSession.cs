@@ -19,7 +19,8 @@ namespace efsession
 
         public override void Load()
         {
-            Kernel.BindPluggable<IConfigureModelBuilder>(x => x.InSingletonScope());
+            Kernel.BindPluggable(typeof (IConnStringDiscoveryConvention<>), x => x.InSingletonScope());
+            Kernel.BindPluggable(typeof(IConfigureModelBuilder<>), x => x.InSingletonScope());
 
             Kernel.BindPluggable<DbContext>(_scanActions);
 
