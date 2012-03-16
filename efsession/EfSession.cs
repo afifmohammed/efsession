@@ -1,5 +1,6 @@
 using System;
 using System.Data.Entity;
+using System.Linq;
 using Ninject.Extensions.ContextPreservation;
 using Ninject.Extensions.Conventions;
 using Ninject.Modules;

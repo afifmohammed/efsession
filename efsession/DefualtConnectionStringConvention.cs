@@ -7,7 +7,7 @@ namespace efsession
     {
         public Func<string, bool> IsConnectionString
         {
-            get { return x => x == typeof (TContext).Name; }
+            get { return x => x.Equals(typeof(TContext).Name, StringComparison.OrdinalIgnoreCase); }
         }
     }
 }

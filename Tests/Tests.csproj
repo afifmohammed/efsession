@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{45DA4EB5-7B4A-4BC0-9848-74E9C7555210}</ProjectGuid>
+    <ProjectGuid>{86AA58E7-DCBB-4278-8DF7-57FB33620DAA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>efsession</RootNamespace>
-    <AssemblyName>efsession</AssemblyName>
+    <RootNamespace>Tests</RootNamespace>
+    <AssemblyName>Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,11 +40,11 @@
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject.Extensions.ContextPreservation">
-      <HintPath>..\packages\Ninject.Extensions.ContextPreservation.2.2.0.5\lib\net40-Full\Ninject.Extensions.ContextPreservation.dll</HintPath>
-    </Reference>
     <Reference Include="Ninject.Extensions.Conventions">
       <HintPath>..\packages\Ninject.Extensions.Conventions.2.2.0.5\lib\net40-Full\Ninject.Extensions.Conventions.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.0.12054\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -58,22 +58,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DefualtConnectionStringConvention.cs" />
-    <Compile Include="IConnStringDiscoveryConvention.cs" />
-    <Compile Include="OverridableBindingGenerator.cs" />
-    <Compile Include="EfSession.cs" />
-    <Compile Include="EntityFrameworkContext.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="ICommandStore.cs" />
-    <Compile Include="IConfigureModelBuilder.cs" />
-    <Compile Include="IQueryStore.cs" />
-    <Compile Include="ISession.cs" />
-    <Compile Include="IStore.cs" />
+    <Compile Include="CanSaveUsingSession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Session.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\efsession\efsession.csproj">
+      <Project>{45DA4EB5-7B4A-4BC0-9848-74E9C7555210}</Project>
+      <Name>efsession</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

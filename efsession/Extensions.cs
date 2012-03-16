@@ -71,6 +71,7 @@ namespace efsession
                 else
                     scanner.WhereTypeInheritsFrom(pluggableService);
 
+                scanner.Excluding(pluggableService);
                 scanner.BindWith(new OverridableBindingGenerator(pluggableService));
             });
 
@@ -84,6 +85,7 @@ namespace efsession
                                 scanner.FromAssembliesInPath(AppDomain.CurrentDomain.ExecutingAssmeblyPath());
                                 actions.ForEach(a => a(scanner));
                                 scanner.WhereTypeInheritsFrom<TPluggableService>();
+                                scanner.Excluding<TPluggableService>();
                                 scanner.Where(target => !target.IsAbstract && !target.IsInterface && target.IsClass);
                                 scanner.BindWith(new OverridableBindingGenerator(typeof(TPluggableService)));
                             });
